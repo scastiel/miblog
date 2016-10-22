@@ -1,0 +1,105 @@
+env:
+    browser: true
+    jquery: true
+    mocha: true
+    jasmine: true
+parser: 'babel-eslint'
+extends: 'eslint:recommended'
+# JS globals (false -> not overwrittable)
+globals:
+    # browser globals
+    angular: false
+    MockUtils: false
+    inject: false
+    # NodeJS globals
+    __dirname: false
+    process: false
+    require: false
+    module: false
+    exports: false
+    Promise: false
+    global: false
+    # Protractor globals
+    browser: false
+    element: false
+    by: false
+    $: false
+    $$: false
+rules:
+    # files must end with empty line
+    eol-last:
+        - 2
+        - 'unix'
+    # defines new-line symbol
+    linebreak-style:
+        - 2
+        - 'unix'
+    # `function () {}` but `function method() {}`
+    space-before-function-paren:
+        - 2
+        -
+            anonymous: 'always'
+            named: 'never'
+    object-curly-spacing:
+        - 2
+        - 'always'
+    no-bitwise: 2
+    curly: 2
+    eqeqeq: 2
+    # handle indent correctly
+    indent:
+        - 2
+        - 4
+    # uses single-quoted strings when escaping is not needed
+    quotes:
+        - 2
+        - 'single'
+        - 'avoid-escape'
+    guard-for-in: 2
+    # prevents the use of undefined variables, except for hoisted functions and classes
+    no-use-before-define:
+        - 'error'
+        -
+            functions: false
+            classes: false
+    no-caller: 2
+    no-new: 2
+    no-plusplus: 0
+    no-undef: 2
+    strict:
+        - 1
+        - 'global'
+    semi: 0
+    no-cond-assign: 0
+    no-debugger: 0
+    no-eq-null: 0
+    no-eval: 0
+    no-unused-expressions: 0
+    block-scoped-var: 0
+    no-iterator: 0
+    no-loop-func: 0
+    no-proto: 0
+    no-script-url: 0
+    no-shadow: 2
+    no-new-func: 0
+    no-new-wrappers: 0
+    no-invalid-this: 0
+    no-unused-vars: 2
+    one-var:
+        - 'error'
+        -
+          var: 'never'
+          let: 'never'
+          const: 'never'
+    no-console:
+        - 'error'
+        -
+            allow:
+                - 'error'
+    no-multiple-empty-lines:
+        - 'error'
+        -
+            max: 1
+            maxEOF: 1
+            maxBOF: 1
+    require-yield: 0
