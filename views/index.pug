@@ -1,0 +1,8 @@
+html
+  head
+    title= title
+  body
+    h1= title
+    each post in posts
+        h2= post.title
+        div !{post.htmlContent}
