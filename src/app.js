@@ -3,6 +3,7 @@ import path from 'path';
 import express from 'express';
 import fs from 'fs-promise';
 import PostFactory from './PostFactory';
+import PostRouter from './PostRouter';
 
 export default class Nblog {
     async getPostInfosFromFile(jsonFile) {
@@ -27,18 +28,29 @@ export default class Nblog {
 
         const app = express();
         const port = process.env.PORT || 3000;
+        const postRouter = new PostRouter(this.postsInfos);
         app.set('views', path.join(__dirname, '..', 'views'));
         app.set('view engine', 'pug');
-        app.get('/', async (req, res) => {
-            try {
-                res.render('index', { title, posts: this.postsInfos });
-            } catch (err) {
-                this.handleError(res, err);
-            }
+
+        const routes = {
+            '/': req => postRouter.listPosts({ fromPost: req.query.fromPost })
+        };
+
+        Object.keys(routes).forEach(routePath => {
+            app.get(routePath, (req, res) => {
+                try {
+                    const { view, data } = routes[routePath](req);
+                    res.render(view, { title, ... data });
+                } catch (err) {
+                    this.handleError(res, err);
+                }
+            });
         });
+
         app.use((err, req, res) => {
             this.handleError(res, err);
         });
+
         app.listen(port, () => {
             console.log(`Application running on port ${port}.`); //eslint-disable-line
         });

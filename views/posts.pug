@@ -1,8 +1,6 @@
-html
-  head
-    title= title
-  body
-    h1= title
+extends layout.pug
+
+block content
     each post in posts
         h2= post.title
         div !{post.htmlContent}
