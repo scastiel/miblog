@@ -1,5 +1,10 @@
 
-import gfm from 'github-flavored-markdown';
+import marked from 'marked';
+import highlight from 'highlight.js';
+
+marked.setOptions({
+    highlight: code => highlight.highlightAuto(code).value
+});
 
 export default class Post {
     constructor({ id, title, date, markdownContent }) {
@@ -10,7 +15,7 @@ export default class Post {
     }
     get htmlContent() {
         if (!this._htmlContent) {
-            this._htmlContent = gfm.parse(this.markdownContent);
+            this._htmlContent = marked(this.markdownContent);
         }
         return this._htmlContent;
     }
