@@ -1,4 +1,5 @@
 
 mixin post(post)
-    h2= post.title
+    h2
+        a(href='/posts/'+post.id)= post.title
     div !{post.htmlContent}
