@@ -2,27 +2,24 @@
 import path from 'path';
 import express from 'express';
 import fs from 'fs-promise';
-import gfm from 'github-flavored-markdown';
+import PostFactory from './PostFactory';
 
 export default class Nblog {
     async getPostInfosFromFile(jsonFile) {
-        const infosFile = path.join(this.postsDirectory, jsonFile);
-        const contentFile = infosFile.replace(/\.json$/, '.md');
-        const postInfos = JSON.parse(await fs.readFile(infosFile, 'utf8'));
-        const markdownContent = await fs.readFile(contentFile, 'utf-8');
-        const htmlContent = gfm.parse(markdownContent);
-        return {
-            ... postInfos,
-            infosFile,
-            contentFile,
-            markdownContent,
-            htmlContent
-        };
+        const postFactory = new PostFactory();
+        return await postFactory.createPostFromJsonFile(jsonFile);
     }
     async getPostsInfos() {
         const files = await fs.readdir(this.postsDirectory);
         const postsJsonFiles = files.filter(filename => filename.match(/\.json$/));
-        return await Promise.all(postsJsonFiles.map(::this.getPostInfosFromFile));
+        const postFactory = new PostFactory();
+        return await Promise.all(postsJsonFiles.map(async jsonFile => {
+            return await postFactory.createPostFromJsonFile(path.join(this.postsDirectory, jsonFile));
+        }));
+    }
+    handleError(res, err) {
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
     }
     async main({ title, postsDirectory }) {
         this.postsDirectory = postsDirectory;
@@ -33,8 +30,15 @@ export default class Nblog {
         app.set('views', path.join(__dirname, '..', 'views'));
         app.set('view engine', 'pug');
         app.get('/', async (req, res) => {
-            const postsInfos = await this.getPostsInfos();
-            res.render('index', { title, posts: postsInfos });
+            try {
+                const postsInfos = await this.getPostsInfos();
+                res.render('index', { title, posts: postsInfos });
+            } catch (err) {
+                this.handleError(res, err);
+            }
+        });
+        app.use((err, req, res) => {
+            this.handleError(res, err);
         });
         app.listen(port, () => {
             console.log(`Application running on port ${port}.`); //eslint-disable-line
