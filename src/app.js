@@ -23,7 +23,7 @@ export default class Nblog {
     }
     async main({ title, postsDirectory }) {
         this.postsDirectory = postsDirectory;
-        this.postsInfos = this.getPostsInfos();
+        this.postsInfos = await this.getPostsInfos();
 
         const app = express();
         const port = process.env.PORT || 3000;
@@ -31,8 +31,7 @@ export default class Nblog {
         app.set('view engine', 'pug');
         app.get('/', async (req, res) => {
             try {
-                const postsInfos = await this.getPostsInfos();
-                res.render('index', { title, posts: postsInfos });
+                res.render('index', { title, posts: this.postsInfos });
             } catch (err) {
                 this.handleError(res, err);
             }
