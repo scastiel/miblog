@@ -20,9 +20,10 @@ export default class Nblog {
     }
     handleError(res, err) {
         console.error(err.stack);
-        res.status(500).send('Something broke!');
+        res.status(500).render('500', { title: this.title });
     }
     async main({ title, postsDirectory }) {
+        this.title = title;
         this.postsDirectory = postsDirectory;
         this.postsInfos = await this.getPostsInfos();
 
@@ -33,13 +34,17 @@ export default class Nblog {
         app.set('view engine', 'pug');
 
         const routes = {
-            '/': req => postRouter.listPosts({ fromPost: req.query.fromPost })
+            '/': req => postRouter.listPosts({ fromPost: req.query.fromPost }),
+            '/posts/:postId': req => postRouter.showPost(req.params.postId)
         };
 
         Object.keys(routes).forEach(routePath => {
             app.get(routePath, (req, res) => {
                 try {
-                    const { view, data } = routes[routePath](req);
+                    const { error, view, data } = routes[routePath](req);
+                    if (error) {
+                        res.status(error);
+                    }
                     res.render(view, { title, ... data });
                 } catch (err) {
                     this.handleError(res, err);
@@ -47,8 +52,13 @@ export default class Nblog {
             });
         });
 
-        app.use((err, req, res) => {
+        app.use((req, res) => {
+            res.status(404).render('404', { title: this.title });
+        });
+
+        app.use((err, req, res, next) => {
             this.handleError(res, err);
+            next(err);
         });
 
         app.listen(port, () => {

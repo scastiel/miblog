@@ -2,7 +2,8 @@
 import gfm from 'github-flavored-markdown';
 
 export default class Post {
-    constructor({ title, date, markdownContent }) {
+    constructor({ id, title, date, markdownContent }) {
+        this.id = id;
         this.title = title;
         this.date = date;
         this.markdownContent = markdownContent;
