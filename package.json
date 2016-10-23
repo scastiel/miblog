@@ -1,5 +1,5 @@
 {
-  "name": "nblog",
+  "name": "miblog",
   "version": "1.0.0",
   "description": "A minimalistic blog system for developers",
   "main": "index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/scastiel/nblog.git"
+    "url": "git+https://github.com/scastiel/miblog.git"
   },
   "keywords": [
     "blog"
@@ -22,9 +22,9 @@
   "author": "Sébastien Castiel <sebastien@castiel.me>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/scastiel/nblog/issues"
+    "url": "https://github.com/scastiel/miblog/issues"
   },
-  "homepage": "https://github.com/scastiel/nblog#readme",
+  "homepage": "https://github.com/scastiel/miblog#readme",
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-eslint": "^7.0.0",

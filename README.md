@@ -1,6 +1,6 @@
-# Nblog – another blog management system
+# Miblog – another blog management system
 
-**Nblog** is a minimalistic blog management system made for developers.
+**Miblog** is a minimalistic blog management system made for developers.
 
 ## Features
 
@@ -13,20 +13,20 @@
 
 ## Requirements
 
-*Nblog* is basically an [npm](https://www.npmjs.com) package. That's why to use it, everything you need is Node.js, plus of course a Node.js-compatible web hosting service if you plan to make your blog available somewhere.
+*Miblog* is basically an [npm](https://www.npmjs.com) package. That's why to use it, everything you need is Node.js, plus of course a Node.js-compatible web hosting service if you plan to make your blog available somewhere.
 
 ## Installation
 
 1. Create a new directory on your system.
-2. Install *Nblog*: `npm install nblog`
+2. Install *Miblog*: `npm install miblog`
 3. Create an *index.js* file, and a *posts* directory, see below.
 
 The *index.js* file is the file you'll run to start the webserver:
 
 ```javascript
 // index.js
-var Nblog = require('nblog');
-var blog = new Nblog();
+var Miblog = require('Miblog');
+var blog = new Miblog();
 blog.main({
     baseUrl: 'http://localhost:3000',
     title: 'My wonderful blog',
@@ -85,4 +85,4 @@ If you want to contribute you're welcome! Make some pull-request :)
 
 ## License
 
-*Nblog* is provided under [GPL-v3.0](https://www.gnu.org/licenses/gpl.html).
+*Miblog* is provided under [GPL-v3.0](https://www.gnu.org/licenses/gpl.html).

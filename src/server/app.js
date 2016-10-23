@@ -6,7 +6,7 @@ import PostFactory from './PostFactory';
 import PostRouter from './PostRouter';
 import marked from 'marked';
 
-export default class Nblog {
+export default class Miblog {
     async getPostInfosFromFile(jsonFile) {
         const postFactory = new PostFactory();
         return await postFactory.createPostFromJsonFile(jsonFile);
