@@ -4,6 +4,7 @@ import express from 'express';
 import fs from 'fs-promise';
 import PostFactory from './PostFactory';
 import PostRouter from './PostRouter';
+import marked from 'marked';
 
 export default class Nblog {
     async getPostInfosFromFile(jsonFile) {
@@ -22,10 +23,13 @@ export default class Nblog {
     }
     handleError(res, err) {
         console.error(err.stack);
-        res.status(500).render('500', { title: this.title });
+        res.status(500).render('500', { ... this.commonInfos });
     }
-    async main({ title, postsDirectory }) {
-        this.title = title;
+    async main({ title, description, postsDirectory }) {
+        this.commonInfos = {
+            title,
+            description: marked(description)
+        };
         this.postsDirectory = postsDirectory;
         this.postsInfos = await this.getPostsInfos();
 
@@ -49,7 +53,7 @@ export default class Nblog {
                     if (error) {
                         res.status(error);
                     }
-                    res.render(view, { title, ... data });
+                    res.render(view, { ... this.commonInfos, ... data });
                 } catch (err) {
                     this.handleError(res, err);
                 }
@@ -57,7 +61,7 @@ export default class Nblog {
         });
 
         app.use((req, res) => {
-            res.status(404).render('404', { title: this.title });
+            res.status(404).render('404', { ... this.commonInfos });
         });
 
         app.use((err, req, res, next) => {
