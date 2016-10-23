@@ -4,6 +4,8 @@ include mixins/post.pug
 block content
     each post in posts
         +post(post)
+        if disqusId
+            a.comment-count(href=baseUrl+'/posts/'+post.id+'#disqus_thread')
     else
         p No post found for this query.
     if moreRecentPostsLink || olderPostsLink
@@ -15,3 +17,5 @@ block content
                 if olderPostsLink
                     li
                         a(href=olderPostsLink) Older posts »
+    if disqusId
+        script#dsq-count-scr(src='//' + disqusId + '.disqus.com/count.js',async)
