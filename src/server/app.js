@@ -25,13 +25,14 @@ export default class Nblog {
         console.error(err.stack);
         res.status(500).render('500', { ... this.commonInfos });
     }
-    async main({ baseUrl, title, description, footer, postsDirectory, publicDirectory , disqusId }) {
+    async main({ baseUrl, title, description, footer, postsDirectory, publicDirectory , disqusId, analyticsId }) {
         this.commonInfos = {
             baseUrl,
             title,
             description: marked(description),
             footer: marked(footer),
-            disqusId
+            disqusId,
+            analyticsId
         };
         this.postsDirectory = postsDirectory;
         this.postsInfos = await this.getPostsInfos();

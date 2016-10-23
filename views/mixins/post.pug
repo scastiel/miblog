@@ -3,7 +3,7 @@ mixin post(post)
     article
         header
             h2
-                a(href='/posts/'+post.id)= post.title
+                a(href=baseUrl+'/posts/'+post.id)= post.title
             .infos
                 time(datetime=post.date.toISOString())= post.date.fromNow()
         .content !{post.htmlContent}
