@@ -45,12 +45,29 @@ header.blog-header {
             font-size: 21px;
         }
         font-style: italic;
-        color: darkgray;
         margin-bottom: 15px;
         p {
             margin: 0;
         }
     }
+}
+
+.blog-description, .blog-footer {
+    color: @blog-description-color;
+    font-size: 21px;
+    @media (max-device-width: 480px) {
+        font-size: 16px;
+    }
+    @media (min-device-width: 481px) and (max-device-width: 768px) {
+        font-size: 21px;
+    }
+    font-style: italic;
+}
+
+footer.blog-footer {
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px dotted lightgray;
 }
 
 nav.pagination {
