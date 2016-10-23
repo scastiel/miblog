@@ -36,7 +36,7 @@ export default class Nblog {
         app.set('view engine', 'pug');
 
         const routes = {
-            '/': req => postRouter.listPosts({ fromPost: req.query.fromPost }),
+            '/': req => postRouter.listPosts({ fromPost: parseInt(req.query.fromPost) || 0 }),
             '/posts/:postId': req => postRouter.showPost(req.params.postId)
         };
 

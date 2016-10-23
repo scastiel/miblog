@@ -4,3 +4,11 @@ include mixins/post.pug
 block content
     each post in posts
         +post(post)
+    else
+        p No post found for this query.
+    if moreRecentPostsLink
+        p
+            a(href=moreRecentPostsLink) More recent posts
+    if olderPostsLink
+        p
+            a(href=olderPostsLink) Older posts
