@@ -4,15 +4,17 @@ export default class PostRouter {
         this.posts = posts;
         this.nbPostsPerPage = nbPostsPerPage;
     }
-    listPosts({ fromPost = 0 }) {
+    async listPosts({ fromPost = 0 }) {
         const posts = this.posts.slice(fromPost, this.nbPostsPerPage);
+        await Promise.all(posts.map(p => p.fetchContent()));
         return { view: 'posts', data: { posts } };
     }
-    showPost(postId) {
+    async showPost(postId) {
         const post = this.posts.find(p => p.id === postId);
         if (!post) {
             return { error: 404, view: 'invalid-post' };
         } else {
+            await post.fetchContent();
             return { view: 'post', data: { post } };
         }
     }

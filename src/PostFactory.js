@@ -12,11 +12,10 @@ export default class PostFactory {
         const id = path.basename(jsonFile).replace(/\.json/, '');
         const contentFile = jsonFile.replace(/\.json$/, '.md');
         const postInfos = JSON.parse(await fs.readFile(jsonFile, 'utf8'));
-        const markdownContent = await fs.readFile(contentFile, 'utf-8');
         return new Post({
             ... postInfos,
             id,
-            markdownContent
+            contentFile
         });
     }
 }

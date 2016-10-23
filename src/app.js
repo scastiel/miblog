@@ -41,9 +41,9 @@ export default class Nblog {
         };
 
         Object.keys(routes).forEach(routePath => {
-            app.get(routePath, (req, res) => {
+            app.get(routePath, async (req, res) => {
                 try {
-                    const { error, view, data } = routes[routePath](req);
+                    const { error, view, data } = await routes[routePath](req);
                     if (error) {
                         res.status(error);
                     }
