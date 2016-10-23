@@ -4,5 +4,6 @@ mixin post(post)
         header
             h2
                 a(href='/posts/'+post.id)= post.title
-            time(datetime=post.date.toISOString())= post.date.fromNow()
-        div !{post.htmlContent}
+            .infos
+                time(datetime=post.date.toISOString())= post.date.fromNow()
+        .content !{post.htmlContent}
