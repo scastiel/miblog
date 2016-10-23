@@ -3,10 +3,14 @@
 article {
     header {
         h2 {
-            color: @post-content-color;
-            // font-family: 'Lucida Grande', sans-serif;
-            // letter-spacing: -1.11667px;
+            color: @post-title-color;
             font-size: 40px;
+            @media (max-device-width: 480px) {
+                font-size: 30px;
+            }
+            @media (min-device-width: 481px) and (max-device-width: 768px) {
+                font-size: 35px;
+            }
             font-weight: 700;
             margin-top: 50px;
             margin-bottom: 0;

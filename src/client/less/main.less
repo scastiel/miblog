@@ -10,4 +10,24 @@ body {
     font-size: 21px;
 }
 
+header.blog-header {
+    border-bottom: 1px dotted lightgray;
+    h1.blog-title {
+        margin-top: 50px;
+        font-size: 60px;
+        @media (max-device-width: 480px) {
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        @media (min-device-width: 481px) and (max-device-width: 768px) {
+            margin-top: 30px;
+            font-size: 40px;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+}
+
 @import 'post.less';
