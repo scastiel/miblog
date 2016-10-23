@@ -15,11 +15,18 @@ export default class Post {
         this.contentFile = contentFile;
         this.markdownContent = '';
         this.htmlContent = '';
+        this.markdownExcerpt = '';
+        this.htmlExcerpt = '';
     }
     async fetchContent() {
         if (!this.markdownContent) {
             this.markdownContent = await fs.readFile(this.contentFile, 'utf-8');
             this.htmlContent = marked(this.markdownContent);
+            const readMoreMarkerPosition = this.markdownContent.indexOf('<!--readmore-->');
+            if (readMoreMarkerPosition > -1) {
+                this.markdownExcerpt = this.markdownContent.slice(0, readMoreMarkerPosition);
+                this.htmlExcerpt = marked(this.markdownExcerpt);
+            }
         }
     }
 }

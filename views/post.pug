@@ -5,7 +5,7 @@ block title
     title #{post.title} – #{title}
 
 block content
-    +post(post)
+    +post(post, false)
 
     if disqusId
         #disqus_thread

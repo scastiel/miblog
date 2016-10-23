@@ -3,7 +3,7 @@ include mixins/post.pug
 
 block content
     each post in posts
-        +post(post)
+        +post(post, true)
         if disqusId
             a.comment-count(href=baseUrl+'/posts/'+post.id+'#disqus_thread')
     else

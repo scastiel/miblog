@@ -1,9 +1,13 @@
 
-mixin post(post)
+mixin post(post, excerptOnly)
     article
         header
             h2
                 a(href=baseUrl+'/posts/'+post.id)= post.title
             .infos
                 time(datetime=post.date.toISOString())= post.date.fromNow()
-        .content !{post.htmlContent}
+        if excerptOnly && post.htmlExcerpt
+            .content !{post.htmlExcerpt}
+            a(href=baseUrl+'/posts/'+post.id) Continue reading…
+        else
+            .content !{post.htmlContent}
