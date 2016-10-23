@@ -7,11 +7,11 @@ block content
     else
         p No post found for this query.
     if moreRecentPostsLink || olderPostsLink
-        nav
+        nav.pagination
             ul
                 if moreRecentPostsLink
                     li
-                        a(href=moreRecentPostsLink) More recent posts
+                        a(href=moreRecentPostsLink) « More recent posts
                 if olderPostsLink
                     li
-                        a(href=olderPostsLink) Older posts
+                        a(href=olderPostsLink) Older posts »

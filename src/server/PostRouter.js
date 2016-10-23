@@ -10,7 +10,8 @@ export default class PostRouter {
         let moreRecentPostsLink;
         let olderPostsLink;
         if (fromPost > 0) {
-            moreRecentPostsLink = `?fromPost=${Math.max(0, fromPost - this.nbPostsPerPage)}`;
+            const moreRecentPostsLinksFromPost = Math.max(0, fromPost - this.nbPostsPerPage);
+            moreRecentPostsLink = moreRecentPostsLinksFromPost === 0 ? '?' : `?fromPost=${moreRecentPostsLinksFromPost}`;
         }
         if (fromPost + this.nbPostsPerPage < this.posts.length) {
             olderPostsLink = `?fromPost=${fromPost + this.nbPostsPerPage}`;

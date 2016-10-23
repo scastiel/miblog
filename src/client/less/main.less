@@ -10,6 +10,11 @@ body {
     font-size: 21px;
 }
 
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 header.blog-header {
     border-bottom: 1px dotted lightgray;
     h1.blog-title {
@@ -26,6 +31,18 @@ header.blog-header {
         a {
             color: inherit;
             text-decoration: none;
+        }
+    }
+}
+
+nav.pagination {
+    ul {
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        li {
+            list-style-type: none;
         }
     }
 }
