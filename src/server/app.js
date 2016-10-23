@@ -32,8 +32,10 @@ export default class Nblog {
         const app = express();
         const port = process.env.PORT || 3000;
         const postRouter = new PostRouter(this.postsInfos);
-        app.set('views', path.join(__dirname, '..', 'views'));
+        app.set('views', path.join(__dirname, '..', '..', 'views'));
         app.set('view engine', 'pug');
+
+        app.use(express.static(path.join(__dirname, '..', 'client')));
 
         const routes = {
             '/': req => postRouter.listPosts({ fromPost: parseInt(req.query.fromPost) || 0 }),
