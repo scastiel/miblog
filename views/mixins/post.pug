@@ -1,5 +1,8 @@
 
 mixin post(post)
-    h2
-        a(href='/posts/'+post.id)= post.title
-    div !{post.htmlContent}
+    article
+        header
+            h2
+                a(href='/posts/'+post.id)= post.title
+            time(datetime=post.date.toISOString())= post.date.fromNow()
+        div !{post.htmlContent}

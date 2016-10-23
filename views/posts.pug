@@ -6,9 +6,12 @@ block content
         +post(post)
     else
         p No post found for this query.
-    if moreRecentPostsLink
-        p
-            a(href=moreRecentPostsLink) More recent posts
-    if olderPostsLink
-        p
-            a(href=olderPostsLink) Older posts
+    if moreRecentPostsLink || olderPostsLink
+        nav
+            ul
+                if moreRecentPostsLink
+                    li
+                        a(href=moreRecentPostsLink) More recent posts
+                if olderPostsLink
+                    li
+                        a(href=olderPostsLink) Older posts

@@ -17,7 +17,7 @@ export default class Nblog {
         const postsInfos = await Promise.all(postsJsonFiles.map(async jsonFile => {
             return await postFactory.createPostFromJsonFile(path.join(this.postsDirectory, jsonFile));
         }));
-        postsInfos.sort((post1, post2) => post1.date < post2.date);
+        postsInfos.sort((post1, post2) => post1.date.isBefore(post2.date));
         return postsInfos;
     }
     handleError(res, err) {
