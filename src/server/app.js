@@ -25,7 +25,7 @@ export default class Nblog {
         console.error(err.stack);
         res.status(500).render('500', { ... this.commonInfos });
     }
-    async main({ title, description, footer, postsDirectory }) {
+    async main({ title, description, footer, postsDirectory, publicDirectory }) {
         this.commonInfos = {
             title,
             description: marked(description),
@@ -40,6 +40,7 @@ export default class Nblog {
         app.set('views', path.join(__dirname, '..', '..', 'views'));
         app.set('view engine', 'pug');
 
+        app.use('/public', express.static(publicDirectory));
         app.use(express.static(path.join(__dirname, '..', 'client')));
 
         const routes = {
