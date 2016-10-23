@@ -1,7 +1,7 @@
 {
   "name": "nblog",
   "version": "1.0.0",
-  "description": "A blog system for developers",
+  "description": "A minimalistic blog system for developers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,8 @@
     "watch:js": "npm run build:js -- --watch",
     "build:less": "lessc src/client/less/main.less dist/client/css/app.css",
     "build": "npm run build:js && npm run build:less",
-    "watch": "npm run watch:js"
+    "watch": "npm run watch:js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
