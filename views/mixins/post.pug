@@ -3,11 +3,11 @@ mixin post(post, excerptOnly)
     article
         header
             h2
-                a(href=baseUrl+'/posts/'+post.id)= post.title
+                a(href=baseUrl+'/posts/'+post.id+'.html')= post.title
             .infos
-                time(datetime=post.date.toISOString())= post.date.fromNow()
+                time(datetime=post.date.toISOString())= post.date.format('ll')
         if excerptOnly && post.htmlExcerpt
             .content !{post.htmlExcerpt}
-            a(href=baseUrl+'/posts/'+post.id) Continue reading…
+            a(href=baseUrl+'/posts/'+post.id+'.html') Continue reading…
         else
             .content !{post.htmlContent}

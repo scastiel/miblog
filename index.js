@@ -1,4 +1,4 @@
+#!/usr/bin/env node
 
 require('babel-polyfill');
-
-module.exports = require('./dist/server/app.js').default;
+require('./dist/server/main.js');

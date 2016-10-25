@@ -11,13 +11,15 @@ export default class PostRouter {
         let olderPostsLink;
         if (fromPost > 0) {
             const moreRecentPostsLinksFromPost = Math.max(0, fromPost - this.nbPostsPerPage);
-            moreRecentPostsLink = moreRecentPostsLinksFromPost === 0 ? '?' : `?fromPost=${moreRecentPostsLinksFromPost}`;
+            const pageNumber = moreRecentPostsLinksFromPost / this.nbPostsPerPage + 1;
+            moreRecentPostsLink = pageNumber === 1 ? '/' : `/page-${pageNumber}.html`;
         }
         if (fromPost + this.nbPostsPerPage < this.posts.length) {
-            olderPostsLink = `?fromPost=${fromPost + this.nbPostsPerPage}`;
+            const pageNumber = (fromPost + this.nbPostsPerPage) / this.nbPostsPerPage + 1;
+            olderPostsLink = `/page-${pageNumber}.html`;
         }
         await Promise.all(posts.map(p => p.fetchContent()));
-        return { view: 'posts', data: { posts, moreRecentPostsLink, olderPostsLink } };
+        return { posts, moreRecentPostsLink, olderPostsLink };
     }
     async showPost(postId) {
         const post = this.posts.find(p => p.id === postId);
@@ -25,7 +27,7 @@ export default class PostRouter {
             return { error: 404, view: 'invalid-post' };
         } else {
             await post.fetchContent();
-            return { view: 'post', data: { post } };
+            return { post };
         }
     }
 }
