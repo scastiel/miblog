@@ -13,9 +13,9 @@ block content
             ul
                 if moreRecentPostsLink
                     li
-                        a(href=moreRecentPostsLink) « More recent posts
+                        a(href=baseUrl+moreRecentPostsLink) « More recent posts
                 if olderPostsLink
                     li
-                        a(href=olderPostsLink) Older posts »
+                        a(href=baseUrl+olderPostsLink) Older posts »
     if disqusId
         script#dsq-count-scr(src='//' + disqusId + '.disqus.com/count.js',async)
