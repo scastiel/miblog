@@ -2,6 +2,8 @@
 
 **Miblog** is a minimalistic static blog management system made for developers. By static, understand that it's basically a command line tool which, from a given configuration file and some post files, will generate all a ready-to-deploy directory with HTML files, CSS, images, etc.
 
+See demo at [scastiel.github.io/miblog-demo](https://scastiel.github.io/miblog-demo).
+
 ## Features
 
 - Minimalistic design with very clean typo.
@@ -18,7 +20,9 @@
 
 ## Quick start
 
-Here is the right way to use *Miblog*. First create a new directory on your system, initialize a *package.json* file (by running `npm init`), then install *Miblog*: `npm install --save miblog`.
+You can start by forking the [demo blog repository](https://github.com/scastiel/miblog-demo). Or, here is the right way to configure a new blog with *Miblog* from scratch.
+
+First create a new directory on your system, initialize a *package.json* file (by running `npm init`), then install *Miblog*: `npm install --save miblog`.
 
 In the *package.json* file, add a script which will be used to generate the content of your blog:
 
