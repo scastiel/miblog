@@ -1,42 +1,48 @@
 # Miblog – another blog management system
 
-**Miblog** is a minimalistic blog management system made for developers.
+**Miblog** is a minimalistic static blog management system made for developers. By static, understand that it's basically a command line tool which, from a given configuration file and some post files, will generate all a ready-to-deploy directory with HTML files, CSS, images, etc.
 
 ## Features
 
 - Minimalistic design with very clean typo.
 - Ultra-easy configuration.
 - No database required, write your articles in files.
+- No server-side process like Node.js, Ruby, PHP... generated content is static and ready to deploy!
 - Use Markdown to add formatting to your posts (GitHub-flavored Markdown).
 - Add images to your posts.
 - [Disqus](https://disqus.com) and [Google Analytics](https://analytics.google.com) integration (only if you want).
 
 ## Requirements
 
-*Miblog* is basically an [npm](https://www.npmjs.com) package. That's why to use it, everything you need is Node.js, plus of course a Node.js-compatible web hosting service if you plan to make your blog available somewhere.
+*Miblog* is a command line tool availble as an [npm](https://www.npmjs.com) package. That's why to use it, everything you need is Node.js, plus of course a web hosting service if you plan to make your blog available somewhere.
 
-## Installation
+## Quick start
 
-1. Create a new directory on your system.
-2. Install *Miblog*: `npm install miblog`
-3. Create an *index.js* file, and a *posts* directory, see below.
+Here is the right way to use *Miblog*. First create a new directory on your system, initialize a *package.json* file (by running `npm init`), then install *Miblog*: `npm install --save miblog`.
 
-The *index.js* file is the file you'll run to start the webserver:
+In the *package.json* file, add a script which will be used to generate the content of your blog:
 
 ```javascript
-// index.js
-var Miblog = require('Miblog');
-var blog = new Miblog();
-blog.main({
+// ...
+"scripts": {
+  "generate": "miblog dist"
+},
+// ...
+```
+
+The *dist* parameter to the command *miblog* is the directory where you want the content to be generated.
+
+Next create a *miblog.conf.js* file, which contains the basic configuration for your blog:
+
+```javascript
+module.exports = {
     baseUrl: 'http://localhost:3000',
     title: 'My wonderful blog',
     postsDirectory: __dirname + '/posts'
-}).then(function() {}).catch(err => { console.error(err.stack); });
+};
 ```
 
-These are the basic options that are required to run your blog.
-
-Create a *posts* directory, containing two files: *001-first-post.json* and *001-first-post.md*:
+Finally, create a *posts* directory, containing two files: *001-first-post.json* and *001-first-post.md*:
 
 ```json
 {
@@ -55,11 +61,11 @@ This part will be visible only in single post view.
 You can use *Markdown* to _write_ your posts!
 ```
 
-That's it! Now start you webserver: `node index.js`
+That's it! Now let's generate your blog: `npm run generate`. Everything is generated in the *dist* folder; all you need to do now is running a webserver serving statically your dist directory.
+
+To play with your blog locally, the easiest solution is to use the [http-server](https://github.com/indexzero/http-server) Node module. Install it with `npm install --save http-server`, add a new *script* in your *package.json*: `"start": "http-server dist -p 3000"`, then start the server with `npm start`.
 
 Your blog is now available at *http://localhost:3000* :)
-
-Note that you can change the post by setting the *POST* environment variable, e.g. `PORT=8080 node index.js`.
 
 ## Settings
 

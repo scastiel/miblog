@@ -1,7 +1,7 @@
 {
   "name": "miblog",
-  "version": "1.0.0",
-  "description": "A minimalistic blog system for developers",
+  "version": "2.0.0",
+  "description": "A minimalistic static blog system for developers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
