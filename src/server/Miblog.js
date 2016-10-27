@@ -4,6 +4,7 @@ import fs from 'fs-promise';
 import PostFactory from './PostFactory';
 import HtmlGenerator from './HtmlGenerator';
 import FileWriter from './FileWriter';
+import RssGenerator from './RssGenerator';
 import promiseSeq from './util/promiseSeq';
 import marked from 'marked';
 
@@ -63,8 +64,14 @@ export default class Miblog {
 
         const htmlGenerator = new HtmlGenerator(posts, viewsDirectory, commonInfos, this.config.nbPostsPerPage);
         const fileWriter = new FileWriter(outputDirectory);
-
         const filesToCreate = await htmlGenerator.getAllFilesToGenerate(posts);
+
+        const rssGenerator = new RssGenerator();
+        filesToCreate.push({
+            file: 'rss.xml',
+            content: rssGenerator.generateRssXmlFromPosts(posts, commonInfos)
+        });
+
         const filesToCopy = this.getFilesToCopy();
         const directories = this.getDirectoriesToCreate([ ... filesToCreate, ... filesToCopy ], outputDirectory);
 
