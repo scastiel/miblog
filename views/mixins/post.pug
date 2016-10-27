@@ -8,6 +8,7 @@ mixin post(post, excerptOnly)
                 time(datetime=post.date.toISOString())= post.date.format('ll')
         if excerptOnly && post.htmlExcerpt
             .content !{post.htmlExcerpt}
-            a(href=baseUrl+'/posts/'+post.id+'.html') Continue reading…
+            p
+                a(href=baseUrl+'/posts/'+post.id+'.html') Continue reading…
         else
             .content !{post.htmlContent}
