@@ -1,6 +1,6 @@
 {
   "name": "miblog",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "A minimalistic static blog system for developers",
   "main": "index.js",
   "scripts": {
