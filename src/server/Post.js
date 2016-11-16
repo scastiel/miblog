@@ -4,7 +4,9 @@ import highlight from 'highlight.js';
 import fs from 'fs-promise';
 
 marked.setOptions({
-    highlight: code => highlight.highlightAuto(code).value
+    highlight: (code, lang) => lang ?
+        highlight.highlight(lang, code).value :
+        highlight.highlightAuto(code).value
 });
 
 export default class Post {
