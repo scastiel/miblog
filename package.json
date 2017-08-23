@@ -17,9 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/scastiel/miblog.git"
   },
-  "keywords": [
-    "blog"
-  ],
+  "keywords": ["blog"],
   "author": "Sébastien Castiel <sebastien@castiel.me>",
   "license": "GPL-3.0",
   "bugs": {
@@ -41,7 +39,7 @@
     "commander": "^2.9.0",
     "fs-extra": "^0.30.0",
     "fs-promise": "^0.5.0",
-    "highlight.js": "^9.7.0",
+    "highlight.js": "git+https://github.com/scastiel/highlight.js.git#9.12.0-sc1",
     "marked": "^0.3.6",
     "moment": "^2.15.1",
     "pug": "^2.0.0-beta6",
