@@ -2,7 +2,11 @@
 import path from 'path';
 import program from 'commander';
 import fs from 'fs-promise';
+import highlight from 'highlight.js';
+import highlightReason from './util/highlight-reason';
 import Miblog from './Miblog';
+
+highlight.registerLanguage('reason', highlightReason);
 
 function die(message) {
     console.error(message);
@@ -35,5 +39,7 @@ async function main() {
         console.error(err.stack);
     }
 }
+
+
 
 main();
