@@ -1,6 +1,6 @@
 {
   "name": "miblog",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A minimalistic static blog system for developers",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/scastiel/miblog.git"
   },
-  "keywords": ["blog"],
+  "keywords": [
+    "blog"
+  ],
   "author": "Sébastien Castiel <sebastien@castiel.me>",
   "license": "GPL-3.0",
   "bugs": {
